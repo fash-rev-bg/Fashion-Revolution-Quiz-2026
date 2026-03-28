@@ -64,8 +64,18 @@
   .answers { display:flex; flex-direction:column; gap:.55rem; animation:up .4s ease .05s both; }
   .abtn { display:flex; align-items:flex-start; gap:.75rem; background:transparent; border:1.5px solid rgba(0,27,32,.18); padding:.85rem 1rem; text-align:left; font-family:'Barlow',sans-serif; font-size:.8rem; line-height:1.5; color:rgba(0,27,32,.72); cursor:pointer; transition:all .18s; width:100%; }
   .aletter { min-width:20px; width:20px; height:20px; border:1.5px solid rgba(0,27,32,.22); font-family:'Barlow Condensed',sans-serif; font-size:.6rem; font-weight:700; display:flex; align-items:center; justify-content:center; margin-top:1px; flex-shrink:0; transition:all .18s; }
-  .abtn:hover { border-color:var(--purple); color:var(--ink); background:var(--lav); }
-  .abtn:hover .aletter { background:var(--purple); border-color:var(--purple); color:white; }
+  @media (hover: hover) {
+  .abtn:hover {
+    border-color:var(--purple);
+    color:var(--ink);
+    background:var(--lav);
+  }
+  .abtn:hover .aletter {
+    background:var(--purple);
+    border-color:var(--purple);
+    color:white;
+  }
+}
   .abtn.sel { background:var(--ink); border-color:var(--ink); color:var(--cream); font-weight:500; }
   .abtn.sel .aletter { background:var(--green); border-color:var(--green); color:var(--ink); }
   .abtn:disabled { pointer-events:none; opacity:.5; }
