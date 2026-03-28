@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Какъв моден архетип си? - Fashion Revolution Bulgaria</title>
+<title>Какъв моден архетип си? — Fashion Revolution Bulgaria</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Barlow+Condensed:wght@700;800&family=Barlow:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
 <style>
@@ -59,7 +59,7 @@
   .progtrack { width:100%; height:4px; background:rgba(0,27,32,.12); }
   .progfill { height:100%; background:var(--green); transition:width .4s ease; }
   .qbody { flex:1; padding:1.75rem 1.5rem; display:flex; flex-direction:column; }
-  .disclaimer { display:flex; align-items:center; gap:.5rem; background:var(--lav); border:1.5px solid var(--purple); padding:.5rem .85rem; margin-bottom:1.25rem; font-family:'Barlow Condensed',sans-serif; font-size:.62rem; letter-spacing:.06em; text-transform:uppercase; color:var(--purple); font-weight:700; }
+  .disclaimer { display:flex; align-items:center; gap:.5rem; background:var(--lav); border:1.5px solid var(--purple); padding:.4rem .85rem; font-family:'Barlow Condensed',sans-serif; font-size:.62rem; letter-spacing:.06em; text-transform:uppercase; color:var(--purple); font-weight:700; }
   .qtext { font-family:'Barlow Condensed',sans-serif; font-size:clamp(1.3rem,6vw,1.9rem); font-weight:800; text-transform:uppercase; line-height:1.2; color:var(--ink); margin-bottom:1.25rem; animation:up .35s ease both; }
   .answers { display:flex; flex-direction:column; gap:.55rem; animation:up .4s ease .05s both; }
   .abtn { display:flex; align-items:flex-start; gap:.75rem; background:transparent; border:1.5px solid rgba(0,27,32,.18); padding:.85rem 1rem; text-align:left; font-family:'Barlow',sans-serif; font-size:.8rem; line-height:1.5; color:rgba(0,27,32,.72); cursor:pointer; transition:all .18s; width:100%; }
@@ -100,6 +100,51 @@
   .btn-retry:hover { background:var(--ink); color:var(--cream); }
   .res-foot { padding:1.25rem 1.5rem; border-top:2px solid var(--ink); font-family:'Barlow Condensed',sans-serif; font-size:.52rem; letter-spacing:.15em; text-transform:uppercase; color:rgba(0,27,32,.28); text-align:center; }
 
+  /* Back button + nav row */
+  .qnav {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    margin-bottom: 1.25rem;
+  }
+  .btn-back {
+    display: inline-flex;
+    align-items: center;
+    background: transparent;
+    border: 1.5px solid rgba(0,27,32,.22);
+    padding: .35rem .85rem;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: .62rem;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: rgba(0,27,32,.45);
+    cursor: pointer;
+    transition: all .18s;
+    white-space: nowrap;
+  }
+  .btn-back:hover:not(:disabled) {
+    border-color: var(--purple);
+    color: var(--purple);
+  }
+  .btn-back:disabled {
+    opacity: .25;
+    cursor: default;
+  }
+  .disclaimer {
+    flex: 1;
+  }
+  .qnum-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: .62rem;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--purple);
+    margin-bottom: .5rem;
+    display: block;
+  }
+
   @keyframes up { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
 </style>
 </head>
@@ -124,7 +169,7 @@
       Какъв<br>
       <span class="highlight">моден</span><br>
       архетип<br>
-      <span class="colored">си?</span>
+      <span class="colored">си ти?</span>
     </h1>
     <p class="script-sub">Разбери повече за своите навици</p>
     <p class="script-sub2">8 въпроса · около 2 минути</p>
@@ -150,7 +195,10 @@
     </div>
   </div>
   <div class="qbody">
-    <div class="disclaimer">👆&nbsp; Избери само един отговор</div>
+    <div class="qnav">
+    <button class="btn-back" id="btnBack" onclick="goBack()">← Назад</button>
+    <div class="disclaimer">👆 Само един отговор</div>
+  </div>
     <p class="qtext" id="qText"></p>
     <div class="answers" id="aContainer"></div>
   </div>
@@ -205,7 +253,7 @@ var questions = [
     text: 'Кога решаваш, че ти трябва нова дреха?',
     answers: [
       {text:'Когато видя нов тренд в социалните мрежи', type:'A'},
-      {text:'Когато открия марка, която ми харесва и има добри практики', type:'B'},
+      {text:'Когато открия марка, която ми харесва и работи отговорно', type:'B'},
       {text:'Когато попадна на страхотна находка в магазин за втора употреба', type:'C'},
       {text:'Само когато нещо вече е износено или скъсано', type:'D'},
       {text:'Когато съм стресиран/а, тъжен/а или просто ми е скучно', type:'E'},
@@ -217,8 +265,8 @@ var questions = [
       {text:'Перфектен повод да си взема нещо ново', type:'A'},
       {text:'Поправям я, сам/а или при шивач', type:'B'},
       {text:'Разглеждам магазини за втора употреба, може да намеря нещо още по-яко', type:'C'},
-      {text:'Купувам същото, но по-качествено', type:'D'},
-      {text:'Вземам нещо ново без много да мисля', type:'E'},
+      {text:'Вземам нещо ново на момента, без много да мисля', type:'E'},
+      {text:'Става ми неприятно, но просто почвам да нося друга дреха от гардероба си', type:'D'},
     ]
   },
   {
@@ -226,7 +274,7 @@ var questions = [
     answers: [
       {text:'От новата колекция на [марка], току-що излезе', type:'A'},
       {text:'От устойчив бранд, произвеждат само качествени дрехи', type:'B'},
-      {text:'От магазин за втора употреба, намерих я за 5 лева', type:'C'},
+      {text:'От магазин за втора употреба, намерих я за 5 евро', type:'C'},
       {text:'От преди много години е, намерих я в гардероба на роднини', type:'D'},
       {text:'Не помня, взех я импулсивно', type:'E'},
     ]
@@ -252,7 +300,7 @@ var questions = [
     ]
   },
   {
-    text: 'Имаш 100 лв. за дрехи. Какво правиш?',
+    text: 'Имаш 100 евро за дрехи. Какво правиш?',
     answers: [
       {text:'Вземам няколко модерни неща', type:'A'},
       {text:'Давам ги за едно качествено и устойчиво произведено облекло', type:'B'},
@@ -276,48 +324,55 @@ var questions = [
 var results = {
   A: {
     bar:'#E1FB3B', emoji:'🔥', name:'Стайл Пионерът',
-    desc:'Живееш в крачка с модата - новите колекции те вдъхновяват, обичаш да експериментираш и да бъдеш сред първите с нова тенденция. Стилът ти е форма на самоизразяване и го правиш смело.',
+    desc:'Живееш в крачка с модата — новите колекции те вдъхновяват, обичаш да експериментираш и да бъдеш сред първите с нова тенденция. Стилът ти е форма на самоизразяване и го правиш смело.',
     traits:['Следи тенденциите','Креативен/а','Изразителен/а','Социален/а'],
     impact:'Средно купуваш 40–60 нови дрехи годишно, около 3 пъти повече от устойчивото ниво. Модната индустрия отговаря за около 10% от глобалните въглеродни емисии. Един fast fashion артикул се носи средно 7–10 пъти, преди да бъде изхвърлен.',
-    tips:['Правилото 30 пъти: преди покупка питай се - ще го нося ли поне 30 пъти? Ако се колебаеш, изчакай.','Опитай втора употреба за тренди дрехи - Vinted или местни магазини. Намираш уникати на 1/5 от цената.','Организирай Swap с приятели - размяна на дрехи. 100% безплатно, 100% ново за теб.'],
+    tips:['Правилото 30 пъти: преди покупка попитай се — ще го нося ли поне 30 пъти? Ако се колебаеш, изчакай.','Опитай втора употреба за трендови дрехи — Vinted или местни магазини. Намираш уникати на 1/5 от цената.','Организирай Clothes Swap с приятели — размяна на дрехи. 100% безплатно, 100% ново за теб.'],
     growth:'Твоята любов към стила е ресурс, не проблем. Насочена по правилния начин, тя може да вдъхнови цяла общност.'
   },
   B: {
     bar:'#8F87F7', emoji:'🌿', name:'Съзнателният Изследовател',
-    desc:'Пазаруваш с ясна цел и познаваш цената зад етикета - не само паричната, но и човешката и екологичната. Информираните ти избори правят реална разлика, дори когато не го осъзнаваш.',
+    desc:'Пазаруваш с ясна цел и познаваш цената зад етикета — не само паричната, но и човешката и екологичната. Информираните ти избори правят реална разлика, дори когато не го осъзнаваш.',
     traits:['Информиран/а','Ценностно-ориентиран/а','Изследовател/ка','Вдъхновяващ/а'],
-    impact:'Вероятно купуваш под 20 нови дрехи годишно. Ако удължиш живота на всяка дреха само с 9 месеца, намаляваш въглеродния й отпечатък с до 30%. Ти вече го правиш и това има измеримо значение.',
-    tips:['Провери Fashion Transparency Index - безплатен годишен доклад за над 250 марки от Fashion Revolution.','Сподели знанията си: препоръчай на приятел/ка от къде да се информират и как да пазаруват по-разумно. Личното влияние е по-мощно от реклама.','Потърси местни български марки с устойчиви практики - локалното производство намалява транспортния отпечатък и подкрепя малкия бизнес.'],
-    growth:'Ти вече си на правилната страна. Следващата стъпка е да поканиш и другите - не с лекции, а с любопитство.'
+    impact:'Вероятно купуваш под 20 нови дрехи годишно. Ако удължиш живота на всяка дреха само с 9 месеца, намаляваш въглеродния й отпечатък с до 30%. Ти вече го правиш — и това има измеримо значение.',
+    tips:['Провери Fashion Transparency Index — безплатен годишен доклад за над 250 марки от Fashion Revolution.','Сподели знанията си: препоръчай на приятел/ка един конкретен ресурс. Личното влияние е по-мощно от реклама.','Потърси местни български марки с устойчиви практики — локалното производство намалява транспортния отпечатък.'],
+    growth:'Ти вече си на правилната страна. Следващата стъпка е да поканиш и другите — не с лекции, а с любопитство.'
   },
   C: {
     bar:'#F3CDD5', emoji:'🪄', name:'Ловецът на Съкровища',
-    desc:'Магазините за втора употреба, базарите и онлайн платформите са твоят терен. Обичаш лова, намирането на уникати с история и факта, че всяка дреха е различна. Нечии минали съкровища стават твоите настоящи.',
+    desc:'Магазините за втора употреба, базарите и онлайн платформите са твоят терен. Обичаш лова, намирането на уникати с история и факта, че всяка дреха е различна. Нечии скрити съкровища стават твоите.',
     traits:['Търпелив/а','Уникален поглед','Обича историите','Кръгово мислене'],
-    impact:'Купуването на втора употреба намалява климатичния отпечатък с до 42% на дреха спрямо ново производство. Ти вече участваш в кръговата икономика. Внимавай само за rebound ефекта - повече покупки, дори от втора употреба, все пак си остават много покупки.',
-    tips:['Задай си лимит - не по брой дрехи, а по носения. Ако няма да го носиш 10 пъти в следващите 6 месеца, пропусни го.','Организирай Размяна на дрехи с приятели - забавно и безплатно.','Сподели находките си с историята зад тях - вдъхнови другите да открият магията на втора употреба.'],
-    growth:'Ти вече живееш в бъдещето на модата. Разкажи историята светът има нужда от повече ловци на съкровища.'
+    impact:'Купуването на втора употреба намалява климатичния отпечатък с до 42% на дреха спрямо ново производство. Ти вече участваш в кръговата икономика. Внимавай само за rebound ефекта — повече покупки, дори от втора употреба, си остават повече покупки.',
+    tips:['Задай си лимит — не по брой дрехи, а по носения. Ако не го виждаш 10 пъти в следващите 6 месеца, пропусни го.','Организирай Clothes Swap с приятели — забавно, безотпадно и безплатно.','Сподели находките си с историята зад тях — вдъхнови другите да открият магията на втора употреба.'],
+    growth:'Ти вече живееш в бъдещето на модата. Разкажи историята — светът има нужда от повече ловци на съкровища.'
   },
   D: {
     bar:'#3D5B2A', emoji:'💡', name:'Умният Минималист',
-    desc:'Купуваш рядко, но обмислено. Не те интересуват тенденциите - интересува те дали дадена дреха си заслужава парите и ще издържи с години. Гардеробът ти е малък, но всяко облекло в него носи стойност.',
+    desc:'Купуваш рядко, но обмислено. Не те интересуват тенденциите — интересува те дали дадена дреха си заслужава парите и ще издържи с години. Гардеробът ти е малък, но всяко облекло в него носи стойност.',
     traits:['Обмислен/а','Практичен/а','Качество пред количество','Дългосрочно мислене'],
-    impact:'Вероятно имаш един от най-малките модни отпечатъци. Удължаването на живота на дрехата е най-ефективното действие за намаляване на модния CO2 - и ти го правиш инстинктивно. Ако носиш всяка дреха с 9 месеца повече, намаляш отпечатъка й с до 30%.',
-    tips:['Пресмятай cost-per-wear: раздели цената на броя носения. Дреха за 120 евро, носена 120 пъти = 1 евро на носене.','Провери произхода на любимите си марки - устойчивото качество означава и честни условия на труд.','Сподели философията си - не като поучение, а като разказ. Минимализмът е контракултура, която светът чува.'],
+    impact:'Вероятно имаш един от най-малките модни отпечатъци. Удължаването на живота на дрехата е най-ефективното действие за намаляване на модния CO2 — и ти го правиш инстинктивно. Ако носиш всяка дреха с 9 месеца повече, намаляш отпечатъка й с до 30%.',
+    tips:['Пресмятай cost-per-wear: раздели цената на броя носения. Дреха за 120 лв, носена 120 пъти = 1 лв на носене.','Провери произхода на любимите си марки — устойчивото качество означава и честни условия на труд.','Сподели философията си — не като поучение, а като разказ. Минимализмът е контракултура, която светът чува.'],
     growth:'Твоят начин на живот е тих, но радикален акт в свят на свръхпроизводство. Не го подценявай.'
   },
   E: {
-    bar:'#EFEDFF', emoji:'💫', name:'Настроенческият Купувач',
-    desc:'Пазаруването понякога е радост, понякога е терапия - и двете са разбираеми. Реагираш на моменти на вдъхновение, обичаш красивите неща и усещането от нова дреха. Емоционалната ти чувствителност е реален дар.',
+    bar:'#EFEDFF', emoji:'💫', name:'Емоционалния Купувач',
+    desc:'Пазаруването понякога е радост, понякога е терапия — и двете са разбираеми. Реагираш на моменти на вдъхновение, обичаш красивите неща и усещането от нова дреха. Емоционалната ти чувствителност е реален дар.',
     traits:['Спонтанен/а','Емоционален/а','Естетически чувствителен/а','Импулсивен/а'],
-    impact:'85% от хората са купували дрехи импулсивно онлайн. Средно 20% от облеклата в шкафа никога не биват носени. Малка пауза преди покупка може да спести пари и замърсявания - без да губиш нито капка от радостта.',
-    tips:['Правилото 24 часа: ако след 24ч все още го искаш - купи го. Прекъсва импулса, без да убива удоволствието.','Насочи тръпката на лова към втора употреба - базарите и Vinted дават същото вълнение с много по-малко последствия.','Създай wishlist вместо да купуваш веднага. Преглеждай го веднъж месечно, ще се изненадаш колко желания отпадат.'],
+    impact:'85% от хората са купували дрехи импулсивно онлайн. Средно 20% от облеклата в шкафа никога не биват носени. Малка пауза преди покупка може да спести пари и отпечатък — без да губиш нито капка от радостта.',
+    tips:['Правилото 24 часа: ако след 24ч все още го искаш — купи го. Прекъсва импулса, без да убива удоволствието.','Насочи тръпката на лова към втора употреба — базарите и Vinted дават същото вълнение с много по-малко последствия.','Създай wishlist вместо да купуваш веднага. Преглеждай я веднъж месечно — ще се изненадаш колко желания отпадат.'],
     growth:'Чувствителността ти е суперсила. Насочена към история и качество, тя може да те превърне в истински куратор на красота.'
   }
 };
 
 var scores={}, currentQ=0, answered=false;
-function resetScores(){ scores={A:0,B:0,C:0,D:0,E:0}; answers={}; }
+// answerHistory stores {type, answerIndex} per question so we can go back
+var answerHistory = {};
+
+function resetScores(){
+  scores={A:0,B:0,C:0,D:0,E:0};
+  answers={};
+  answerHistory={};
+}
 
 function showScreen(id){
   document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});
@@ -330,32 +385,89 @@ function startQuiz(){ resetScores(); currentQ=0; showScreen('quiz'); render(); }
 function render(){
   answered=false;
   var q=questions[currentQ], total=questions.length;
+
+  // counter
   document.getElementById('qCounter').textContent=
     String(currentQ+1).padStart(2,'0')+' / '+String(total).padStart(2,'0');
   document.getElementById('progFill').style.width=((currentQ/total)*100)+'%';
+
+  // back button state
+  var btnBack = document.getElementById('btnBack');
+  if(btnBack) btnBack.disabled = (currentQ === 0);
+
+  // question text with number prefix
   var qt=document.getElementById('qText');
   qt.style.animation='none'; void qt.offsetWidth; qt.style.animation='';
-  qt.textContent=q.text;
+
+  // add a small number label above the question
+  var numLabel = document.getElementById('qNumLabel');
+  if(!numLabel){
+    numLabel = document.createElement('span');
+    numLabel.id = 'qNumLabel';
+    numLabel.className = 'qnum-label';
+    qt.parentNode.insertBefore(numLabel, qt);
+  }
+  numLabel.textContent = 'Въпрос ' + (currentQ+1);
+  qt.textContent = q.text;
+
+  // answers — fresh buttons, no stale .sel
   var ac=document.getElementById('aContainer');
   ac.style.animation='none'; void ac.offsetWidth; ac.style.animation='';
   ac.innerHTML='';
+
+  var prevAnswerIdx = (answerHistory[currentQ] !== undefined) ? answerHistory[currentQ].idx : -1;
+
   q.answers.forEach(function(a,i){
     var btn=document.createElement('button');
     btn.className='abtn';
+    // restore previous selection if going back
+    if(i === prevAnswerIdx) btn.classList.add('sel');
     btn.innerHTML='<span class="aletter">'+L[i]+'</span><span>'+a.text+'</span>';
     btn.onclick=function(){ pick(a.type, btn, i); };
     ac.appendChild(btn);
   });
+
+  // if this question was already answered (navigating back), allow re-selection freely
+  // but don't auto-advance; just show previous state as pre-selected
+  if(prevAnswerIdx !== -1){
+    answered = false; // allow changing
+  }
 }
 
 function pick(type, btn, idx){
-  if(answered)return;
-  answered=true;
-  document.querySelectorAll('.abtn').forEach(function(b){ b.disabled=true; });
+  // remove previous selection visually first
+  document.querySelectorAll('.abtn').forEach(function(b){
+    b.classList.remove('sel');
+    b.disabled = false;
+  });
   btn.classList.add('sel');
-  scores[type]=(scores[type]||0)+1;
-  answers['q'+(currentQ+1)]=type;
-  setTimeout(function(){ currentQ++; currentQ<questions.length?render():showResult(); }, 420);
+
+  // update scores: remove old answer for this Q if any, add new
+  var prev = answerHistory[currentQ];
+  if(prev) {
+    scores[prev.type] = Math.max(0, (scores[prev.type]||0) - 1);
+  }
+  scores[type] = (scores[type]||0) + 1;
+
+  // store history
+  answerHistory[currentQ] = {type: type, idx: idx};
+  answers['q'+(currentQ+1)] = type;
+
+  // brief visual feedback then advance
+  answered = true;
+  document.querySelectorAll('.abtn').forEach(function(b){ b.disabled=true; });
+  setTimeout(function(){
+    currentQ++;
+    answered = false;
+    currentQ < questions.length ? render() : showResult();
+  }, 420);
+}
+
+function goBack(){
+  if(currentQ === 0) return;
+  currentQ--;
+  answered = false;
+  render();
 }
 
 function sendToSheets(winner){
